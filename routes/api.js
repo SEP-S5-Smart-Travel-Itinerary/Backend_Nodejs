@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {getFlightOffers,getFlightRates,getSafety,getCurrentWeather,getAttractionslistByName,getAccomodationslistByName,getDetailsWhenClickSpecificLocation}=require("../controller/apictrl");
+const {getFlightOffers,getDetailsOdSpecificLocation,AutoComplete,getLocations,getFlightRates,getSafety,getCurrentWeather,getAccomodations}=require("../controller/apictrl");
 //const{getAnotherRecommend}=require("../controller/apictrl");
 
 router.post('/flightofffers',getFlightOffers);
@@ -9,8 +9,11 @@ router.post('/safety',getSafety);
 
 router.post('/weather',getCurrentWeather);
 
-router.post('/attractions',getAttractionslistByName);
-router.post('/accomodations',getAccomodationslistByName);
-router.post('/getdetails',getDetailsWhenClickSpecificLocation);
+
+router.post('/locations',getLocations);
+router.post('/accomodations',getAccomodations);
+router.post('/auto',AutoComplete);
+router.post('/details',getDetailsOdSpecificLocation);
+
 
 module.exports=router;

@@ -1,7 +1,7 @@
 var Amadeus = require('amadeus'); 
 require("dotenv").config();
 const axios = require('axios').default;
-const{getFlightOffersService,getDetailsWhenClickSpecificLocationService,getAccomodationslistByNameService,getFlightRatesService,getSafetyService,getCurrentWeatherService,getAttractionslistByNameService} = require("../service/apiServices");
+const{getFlightOffersService,getDetailsOfSpecificLocationService,AutoCompleteService,getAccomodationsService,getLocationsService,getFlightRatesService,getSafetyService,getCurrentWeatherService} = require("../service/apiServices");
 
 var amadeus = new Amadeus({ 
     clientId: process.env["AMADEUS_CLIENT_ID"], 
@@ -21,12 +21,12 @@ module.exports = {
       (err, result) => {
         if (err) {
           res.json({
-            sucess: 0,
+            sucess: false,
             message: "Invalid Login",
           });
         } else {
           res.json({
-            sucess: 1,
+            sucess: true,
             data: result,
           });
         }
@@ -43,12 +43,12 @@ module.exports = {
       (err, result) => {
         if (err) {
           res.json({
-            sucess: 0,
+            sucess: false,
             message: "Invalid Login",
           });
         } else {
           res.json({
-            sucess: 1,
+            sucess: true,
             data: result,
           });
         }
@@ -65,12 +65,12 @@ module.exports = {
       (err, result) => {
         if (err) {
           res.json({
-            sucess: 0,
+            sucess: false,
             message: "Invalid Login",
           });
         } else {
           res.json({
-            sucess: 1,
+            sucess: true,
             data: result,
           });
         }
@@ -87,12 +87,12 @@ module.exports = {
       (err, result) => {
         if (err) {
           res.json({
-            sucess: 0,
+            sucess: false,
             message: "Invalid Login",
           });
         } else {
           res.json({
-            sucess: 1,
+            sucess: true,
             data: result,
           });
         }
@@ -101,19 +101,19 @@ module.exports = {
 
   },
 
-  getAttractionslistByName: (req, res) => {
+  getLocations: (req, res) => {
     const body = req.body;
-    getAttractionslistByNameService(
+    getLocationsService(
       body.place,
       (err, result) => {
         if (err) {
           res.json({
-            sucess: 0,
+            sucess: false,
             message: "Invalid Login",
           });
         } else {
           res.json({
-            sucess: 1,
+            sucess: true,
             data: result,
           });
         }
@@ -122,19 +122,19 @@ module.exports = {
 
   },
 
-  getAccomodationslistByName: (req, res) => {
+  getAccomodations: (req, res) => {
     const body = req.body;
-    getAccomodationslistByNameService(
+    getAccomodationsService(
       body.place,
       (err, result) => {
         if (err) {
           res.json({
-            sucess: 0,
+            sucess: false,
             message: "Invalid Login",
           });
         } else {
           res.json({
-            sucess: 1,
+            sucess: true,
             data: result,
           });
         }
@@ -143,19 +143,19 @@ module.exports = {
 
   },
 
-  getDetailsWhenClickSpecificLocation: (req, res) => {
+  AutoComplete: (req, res) => {
     const body = req.body;
-    getDetailsWhenClickSpecificLocationService(
-      body.location_id,
+    AutoCompleteService(
+      body.place,
       (err, result) => {
         if (err) {
           res.json({
-            sucess: 0,
+            sucess: false,
             message: "Invalid Login",
           });
         } else {
           res.json({
-            sucess: 1,
+            sucess: true,
             data: result,
           });
         }
@@ -164,7 +164,25 @@ module.exports = {
 
   },
 
+  getDetailsOdSpecificLocation: (req, res) => {
+    const body = req.body;
+    getDetailsOfSpecificLocationService(
+      body.place_id,
+      (err, result) => {
+        if (err) {
+          res.json({
+            sucess: false,
+            message: "Invalid Login",
+          });
+        } else {
+          res.json({
+            sucess: true,
+            data: result,
+          });
+        }
+      }
+    );
 
-
+  },
 
     };

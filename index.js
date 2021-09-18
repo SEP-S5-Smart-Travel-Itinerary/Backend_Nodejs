@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
   const mongoose = require('mongoose')
 mongoose.connect("mongodb+srv://sep_mongo_db:SEPmongo2021@cluster0.620gj.mongodb.net/trip",{ useNewUrlParser: true, useUnifiedTopology: true })
-  
+
 
 
 
