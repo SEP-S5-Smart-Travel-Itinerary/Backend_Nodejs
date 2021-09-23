@@ -1,5 +1,6 @@
 const{SignUp,SignIn} = require("../service/userService");
 const {User}= require('../models/user_model');
+const axios = require('axios').default;
 
 
 
@@ -99,24 +100,7 @@ const {User}= require('../models/user_model');
           res.json({ success:false, message:"no bookmarks"});
         }
         else{
-          const arr=result.Bookmarks;
-            var jsonss = new Array();
-          for (var i = 0; i < arr.length; i++){
-            obj=arr[i];
-            
-            getDetailsOfSpecificLocationService(
-              obj,
-              (err, result) => {
-                if (err) {
-                  //jsonss.push(result);
-                } 
-                else{
-                  jsonss.push(result);
-                }
-              }
-            );
-          }
-          res.json({ success:true, message:jsonss});
+          res.json({ success:true, message:result.Bookmarks});
         }
       })
           .catch((err) => {
