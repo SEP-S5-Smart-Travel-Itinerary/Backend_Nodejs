@@ -17,7 +17,17 @@ const ItinerarySchema = new Schema({
         type:Date,
         default:Date.now()
         },
-    Locations:Array,
+    Locations:[{
+        name:String,
+        type:Array,
+        rating:Number,
+        place_id:String,
+        imagelink:Object,
+        startTime:String,
+        endTime:String,
+        latitude:String,
+        longitude:String,
+    }],
     Name:String,
     Transport:Array,
     TripMates:Array,
