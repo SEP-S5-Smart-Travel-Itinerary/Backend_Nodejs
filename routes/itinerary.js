@@ -17,7 +17,7 @@ router.post('/getallitin', ItinController.GetAllItin);
 // Delete Itinerary
 router.post('/deleteitin', ItinController.DeleteItinerary);
 // Add location to travel plan
-router.post('/addlocation', ItinController.AddLocation);
+router.post('/addlocation', ItinController.AddLocationNew);
 // Remove location from travel plan
 router.post('/removelocation', ItinController.RemoveLocation);
 // Change location from travel plan
@@ -36,6 +36,6 @@ router.post('/alldetails', ItinController.getDetailsOfaPlan);
 // change plan Dates
 router.post('/changedates', ItinController.EditPlanDtaes);
 // get plan Locations
-router.post('/planlocations', ItinController.GetPlanLocations);
+router.post('/planlocations', ItinController.GetPlanLocationsNew);
 
 module.exports=router;

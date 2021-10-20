@@ -127,6 +127,52 @@ const AddLocation = (req,res) => {
     }); 
 
 }
+const AddLocationNew = (req,res) => {
+    const location_id = req.body.location_id;
+    const plan_id = req.body.plan_id;
+    const start = req.body.start;
+    const end = req.body.end;
+
+    var inname="";
+    var intype=[];
+    var inrating=0;
+    var inplace_id="";
+    var inimagelink=null;
+    var inlat="";
+    var inlon="";
+    axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${location_id}&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`)
+        .then(function (response) { 
+            const arr=response.data.result;
+            //console.log(arr.name);
+            inname=arr.name;
+            console.log(inname);
+            intype=arr.types;
+            inrating=arr.rating;
+            inplace_id=arr.place_id;
+            inimagelink=arr.photos;
+            inlat=String(arr.geometry.location.lat);
+            inlon=String(arr.geometry.location.lng);
+            //var objLocations = { name:inname,type:intype,rating:inrating ,place_id:inplace_id,imagelink:inimagelink,startTime:start,endTime:end,latitude:inlat,longitude:inlon};
+            Itinerary.update(
+                {_id:plan_id},
+                {$push:{ Locations: {"name":inname,"type":intype,"rating":inrating ,"place_id":inplace_id,"imagelink":inimagelink,"startTime":start,"endTime":end,"latitude":inlat,"longitude":inlon}}},
+                {new: true, upsert: true }
+            )
+            .then(success => {
+                    // console.log(success);
+                    res.statusCode = 200;
+                    res.set("Content-Type", "application/json");
+                    res.json({ success: true, message:success });
+            })
+                .catch((err) => {
+                    res.statusCode = 500;
+                    res.set("Content-Type", "application/json");
+                    res.json({ success: false, message: err });
+            }); 
+          });
+          
+
+}
 
 //Remove Location
 const RemoveLocation = (req,res) => {
@@ -134,7 +180,7 @@ const RemoveLocation = (req,res) => {
     const plan_id = req.body.plan_id;
     Itinerary.updateOne(
         {_id:plan_id},
-        {$pull:{ Locations: location_id}},
+        {$pull:{ Locations: {place_id:location_id}}},
     )
     .then(success => {
             // console.log(success);
@@ -348,6 +394,33 @@ GetPlanLocations = (req, res) => {
     });
 }
 
+GetPlanLocationsNew = (req, res) => {
+    const plan_id = req.body.plan_id;
+    Itinerary.findOne({_id:plan_id})
+    .then((result) => {
+      if (result == null){
+        res.json({ success:false, message:"no plans"});
+      }
+      else{
+        const arr=result.Locations;
+        var array = new Array();
+        for (var i = 0; i < arr.length; i++){
+            obj=arr[i][0]
+          array.push(obj);
+          
+    //}
+  }
+        res.json({ success:true, message:array});
+
+      }
+    })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.set("Content-Type", "application/json");
+            res.json({ success: false, message: err });
+    });
+}
+
 
 
 module.exports ={
@@ -365,4 +438,6 @@ module.exports ={
     getDetailsOfaPlan,
     EditPlanDtaes,
     GetPlanLocations,
+    AddLocationNew,
+    GetPlanLocationsNew,
 };
