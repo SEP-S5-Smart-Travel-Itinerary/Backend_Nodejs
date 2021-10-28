@@ -1,6 +1,7 @@
 const{SignUp,SignIn} = require("../service/userService");
 const {User}= require('../models/user_model');
 const axios = require('axios').default;
+const bcrypt = require('bcrypt');
 
 
 
@@ -37,13 +38,31 @@ const axios = require('axios').default;
               //console.log(err);
               res.json({
                 sucess: 0,
-                message: "Invalid Login",
+                message: "Invalid Email",
               });
             } else {
-              res.json({
+              console.log("data ",result );
+              if(result!=null){
+                if(bcrypt.compareSync(body.password, result["Password"])){
+                res.json({
                 sucess: 1,
                 data: result,
               });
+              }
+              else{
+                res.json({
+                sucess: 0,
+                message: "wrong password",
+              });
+              }
+              }
+              else{
+                res.json({
+                sucess: 0,
+                message: "Invalid Email",
+              });
+              }
+ 
             }
           }
         );
