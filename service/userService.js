@@ -1,4 +1,6 @@
-const {User,}= require('../models/user_model')
+const {User,}= require('../models/user_model');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 module.exports = {
 
@@ -9,11 +11,15 @@ module.exports = {
               return callback(err);
             } else {
                 if(user==null){
+                  
+                  const salt = bcrypt.genSaltSync(saltRounds);
+                  const hash = bcrypt.hashSync(mpassword, salt);
+
                   //console.log(user);
                     const user = User({
                       Username:musername,
                         Email:memail,
-                        Password:mpassword,
+                        Password:hash,
                         
                     })
 
@@ -40,7 +46,7 @@ module.exports = {
 
 
       SignIn(memail, mpassword, callback) {
-        User.findOne({Email:memail,Password:mpassword},(err,user)=>{
+        User.findOne({Email:memail},(err,user)=>{
             if(err){
                 //console.log("errrr");
                 console.log(err)
