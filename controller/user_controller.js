@@ -2,7 +2,7 @@ const{SignUp,SignIn} = require("../service/userService");
 const {User}= require('../models/user_model');
 const axios = require('axios').default;
 const bcrypt = require('bcrypt');
-
+var jwt = require('jsonwebtoken');
 
 
      SignUpctrl = (req, res) => {
@@ -19,9 +19,11 @@ const bcrypt = require('bcrypt');
                 message: "Invalid Email",
               });
             } else {
+               var token = jwt.sign({ id: result._id }, 'password');
               res.json({
                 sucess: 1,
                 data: result,
+                token:token
               });
             }
           }
@@ -41,12 +43,15 @@ const bcrypt = require('bcrypt');
                 message: "Invalid Email",
               });
             } else {
-              console.log("data ",result );
+              // console.log("data ",result.body );
               if(result!=null){
+                
                 if(bcrypt.compareSync(body.password, result["Password"])){
+                  var token = jwt.sign({ id: result._id }, 'password');
                 res.json({
                 sucess: 1,
                 data: result,
+                token: token
               });
               }
               else{
