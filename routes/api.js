@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {getFlightOffers,getPhotos,getFlightRates,getSafety,getCurrentWeather,getLocations,getAccomodations,AutoComplete,getDetailsOdSpecificLocation,getNearbyRestaurants,getNearbyAttractions,getNearbyAccommodations,getSuggestions,getAttractionsbyUserPreference,getTravelMode,getTravelCostBetweenTwoPlaces}=require("../controller/apictrl");
+const {getFlightOffers,getFlightRates,getSafety,getCurrentWeather,getLocations,getAccomodations,AutoComplete,getDetailsOdSpecificLocation,getNearbyRestaurants,getNearbyAttractions,getNearbyAccommodations,getSuggestions,getAttractionsbyUserPreference,getTravelMode,getTravelCostBetweenTwoPlaces}=require("../controller/apictrl");
 //const{getAnotherRecommend}=require("../controller/apictrl");
 
 router.post('/flightofffers',getFlightOffers);
@@ -20,6 +20,6 @@ router.post('/suggestedlocations',getSuggestions);
 router.post('/locationsbycategory',getAttractionsbyUserPreference);
 router.post('/travelmode',getTravelMode);
 router.post('/gettaxifare', getTravelCostBetweenTwoPlaces);
-router.post('/photo',getPhotos);
+//router.post('/photo',getPhotos);
 
 module.exports=router;
