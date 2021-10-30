@@ -251,22 +251,14 @@ module.exports = {
     );
 
   },
-  getPhotos: (req, res) => {
-    const body = req.body;
-    axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${body.ref}&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`)
-      .then(function (response) {
-        
-          console.log("done");
-          res.send(response.data);
-    
-    
-        }).catch(error => {
-          console.log(error);
-          res.send("invalid");
-          //return callback(null,error);
-        });
-
-  },
+  
+  // getPhotos: (req, res) => {
+  //   const body = req.body;
+  //   const uri=`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${body.ref}&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`;
+  //   res.setHeader('Content-Type', 'image');
+  //   res.setHeader('Access-Control-Allow-Origin', '*');
+  //   res.redirect(301, uri);
+  // },
 
   
 
