@@ -419,6 +419,26 @@ GetPlanLocationsNew = (req, res) => {
             res.set("Content-Type", "application/json");
             res.json({ success: false, message: err });
     });
+},
+SearchMember = (req, res) => {
+    const plan_id = req.body.plan_id;
+    const username  = req.body.username;
+    console.log(username);
+    Itinerary.find({_id:plan_id,TripMates:username})
+    .then((result) => {
+        console.log(result.length);
+      if (result.length == 0){
+        res.json({ success:true,message: "donot exist"});
+      }
+      else{
+        res.json({ success:false,message: "exist"});
+      }
+    })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.set("Content-Type", "application/json");
+            res.json({ success: false, message: err });
+    });
 }
 
 
@@ -440,4 +460,5 @@ module.exports ={
     GetPlanLocations,
     AddLocationNew,
     GetPlanLocationsNew,
+    SearchMember,
 };
