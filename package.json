@@ -2,8 +2,8 @@
   "name": "nodeapi",
   "version": "1.0.0",
   "description": "",
-  "engines":{
-    "node":"14.6.0"
+  "engines": {
+    "node": "14.6.0"
   },
   "main": "index.js",
   "scripts": {
