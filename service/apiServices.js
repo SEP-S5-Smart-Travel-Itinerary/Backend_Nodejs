@@ -116,7 +116,8 @@ module.exports = {
       getAccomodationsService(inplace,callback) {
         axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${inplace}+point+of+resturents+and+hotels&language=enradius=10000&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`)
         .then(function (response) { 
-            console.log(response.data.results);
+          
+          
             const arr=response.data.results;
             var jsonss = new Array();
             for (var i = 0; i < arr.length; i++){
@@ -139,7 +140,7 @@ module.exports = {
         axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inplace}&types=geocode&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`)
         .then(function (response) { 
             const arr=response.data.predictions;
-            console.log(arr);
+            // console.log(arr);
             var jsonss = new Array();
             for (var i = 0; i < arr.length; i++){
               obj=arr[i];
@@ -148,7 +149,7 @@ module.exports = {
             
       //}
     }
-          console.log(jsonss);
+          // console.log(jsonss);
           return callback(null,jsonss);
           //return callback(null,response.data.results);
       
@@ -162,10 +163,10 @@ module.exports = {
         axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`)
         .then(function (response) { 
             const arr=response.data.result;
-            console.log(arr);
+            // console.log(arr);
             var jsonss={name:arr.name,type:arr.types,rating:arr.rating,place_id:arr.place_id,imagelink:arr.photos,latitude:arr.geometry.location.lat,longitude:arr.geometry.location.lng,reviews:arr.user_ratings_total};
     
-          console.log(jsonss);
+          // console.log(jsonss);
           return callback(null,jsonss);
           //return callback(null,response.data.results);
       
@@ -186,7 +187,7 @@ module.exports = {
                  obj=arr[i];
            var json1={name:obj.name, type:obj.types,rating:obj.rating, place_id:obj.place_id, imagelink:obj.photos};
            jsonss.push(json1);
-           console.log(jsonss);
+          //  console.log(jsonss);
            }
            return callback(null, jsonss);
          }).catch(error => {
@@ -235,7 +236,7 @@ module.exports = {
            
             var json1={name:obj.name, type:obj.types,rating:obj.rating, place_id:obj.place_id, imagelink:obj.photos};
             jsonss.push(json1);
-            console.log(jsonss);
+            // console.log(jsonss);
             
            }
             return callback(null, jsonss);
@@ -259,7 +260,7 @@ module.exports = {
                   if(obj.rating >=4.0) {
                      var json1={name:obj.name, type:obj.types,rating:obj.rating, place_id:obj.place_id, imagelink:obj.photos};
                      jsonss.push(json1);
-                     console.log(jsonss);
+                    //  console.log(jsonss);
                    }
              }
             return callback(null, jsonss);
@@ -283,7 +284,7 @@ module.exports = {
                   obj=arr[i];
             var json1={name:obj.name, type:obj.types,rating:obj.rating, place_id:obj.place_id, imagelink:obj.photos};
             jsonss.push(json1);
-            console.log(jsonss);
+            // console.log(jsonss);
             }
             return callback(null, jsonss);
           }).catch(error => {

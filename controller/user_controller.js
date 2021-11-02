@@ -19,7 +19,7 @@ var jwt = require('jsonwebtoken');
                 message: "Invalid Email",
               });
             } else {
-               var token = jwt.sign({ id: result._id }, 'password');
+               var token = jwt.sign({ id: result._id  }, 'password');
               res.json({
                 sucess: 1,
                 data: result,
@@ -31,7 +31,10 @@ var jwt = require('jsonwebtoken');
       },
 
        SignInctrl =  (req, res) => {
+        
         const body = req.body;
+         console.log("sign in body is -------");
+         console.log(body);
         SignIn(
           body.email,
           body.password,
@@ -43,7 +46,8 @@ var jwt = require('jsonwebtoken');
                 message: "Invalid Email",
               });
             } else {
-              // console.log("data ",result.body );
+              console.log("this is the user details");
+              console.log(result );
               if(result!=null){
                 
                 if(bcrypt.compareSync(body.password, result["Password"])){
