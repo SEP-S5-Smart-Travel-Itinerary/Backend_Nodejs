@@ -37,5 +37,7 @@ router.post('/alldetails', ItinController.getDetailsOfaPlan);
 router.post('/changedates', ItinController.EditPlanDtaes);
 // get plan Locations
 router.post('/planlocations', ItinController.GetPlanLocationsNew);
+// search members
+router.post('/searchmembers', ItinController.SearchMember);
 
 module.exports=router;
