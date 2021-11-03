@@ -239,6 +239,25 @@ const ChangePassword = (req,res) => {
 
 }
 
+SearchUserPref = (req, res) => {
+  const username  = req.body.username;
+  console.log(username);
+  User.findOne({Email:username})
+  .then((result) => {
+    if (result == null){
+      res.json({ success:false, message:"no user"});
+    }
+    else{
+      res.json({ success:true, message:result.Preferences});
+    }
+  })
+      .catch((err) => {
+          res.statusCode = 500;
+          res.set("Content-Type", "application/json");
+          res.json({ success: false, message: err });
+  });
+}
+
 
 module.exports = {
   SignUpctrl,
@@ -248,6 +267,7 @@ module.exports = {
   GetBookmarkLocations,
   AddCategories,
   ChangeUsername,
-  ChangePassword
+  ChangePassword,
+  SearchUserPref
 
 };
