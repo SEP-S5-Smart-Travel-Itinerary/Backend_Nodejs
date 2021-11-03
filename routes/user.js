@@ -10,6 +10,7 @@ router.post('/getbookmarks',GetBookmarkLocations);
 router.post('/addpreferences',AddCategories);
 router.post('/changeusername',ChangeUsername);
 router.post('/changepassword',ChangePassword);
+router.post('/searchpref',SearchUserPref);
 
 
 module.exports=router;
