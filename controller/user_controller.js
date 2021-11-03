@@ -3,6 +3,7 @@ const {User}= require('../models/user_model');
 const axios = require('axios').default;
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+const saltRounds = 10;
 
 
      SignUpctrl = (req, res) => {
@@ -221,9 +222,14 @@ const ChangePassword = (req,res) => {
  // const old_password = req.body. old_password;
   const new_password = req.body.new_password;
   const email = req.body.email;
+
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hash = bcrypt.hashSync(new_password, salt);
+
+
   User.update(
       {Email:email},
-      {$set:{ Password: new_password}},
+      {$set:{ Password: hash}},
   )
   .then(success => {
           // console.log(success);
