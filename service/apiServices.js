@@ -201,7 +201,7 @@ module.exports = {
        },
 
        getNearbyAttractionsService(lat,lon,callback) {
-         axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lon}&radius=2500&type=tourist_attraction&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`)
+         axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lon}&radius=10000&type=tourist_attraction&key=AIzaSyB06HS2ON1-5EI_JRK4_xlDM4McoEs-aO4`)
          
 
          .then(function(response) {
