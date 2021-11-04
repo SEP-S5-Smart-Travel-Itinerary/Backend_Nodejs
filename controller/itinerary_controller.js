@@ -309,6 +309,25 @@ const AddTravelMedia = (req,res) => {
 
 }
 
+//get travelmodes
+GetTravelModes = (req, res) => {
+    const plan_id = req.body.plan_id;
+    Itinerary.findOne({_id:plan_id})
+    .then((result) => {
+      if (result == null){
+        res.json({ success:false, message:"no plan"});
+      }
+      else{
+        res.json({ success:true, message:result.Transport});
+      }
+    })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.set("Content-Type", "application/json");
+            res.json({ success: false, message: err });
+    });
+}
+
 
 //Change Travel Media
 const ChangeTravelMedia = (req,res) => {
@@ -461,4 +480,5 @@ module.exports ={
     AddLocationNew,
     GetPlanLocationsNew,
     SearchMember,
+    GetTravelModes
 };
