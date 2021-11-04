@@ -29,6 +29,8 @@ router.post('/editbudget', ItinController.EditTravelBudget);
 
 // Add travel media to travel plan
 router.post('/addtravelmedia', ItinController.AddTravelMedia);
+// get travel media
+router.post('/gettravelmedia', ItinController.GetTravelModes);
 // Change travel media of travel plan
 router.post('/changetravelmedia', ItinController.ChangeTravelMedia);
 // get all details of a plan
