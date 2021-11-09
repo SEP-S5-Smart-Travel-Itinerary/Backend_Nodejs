@@ -198,7 +198,7 @@ const RemoveLocation = (req,res) => {
 
 //Remove media
 const Removemedia = (req,res) => {
-    const _id = req.body.location_id;
+    const transport_id = req.body.location_id;
     const plan_id = req.body.plan_id;
     Itinerary.findById(plan_id, (err, file) => {
         console.log(file);
