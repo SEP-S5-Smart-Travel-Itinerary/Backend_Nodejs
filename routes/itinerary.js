@@ -41,5 +41,7 @@ router.post('/changedates', ItinController.EditPlanDtaes);
 router.post('/planlocations', ItinController.GetPlanLocationsNew);
 // search members
 router.post('/searchmembers', ItinController.SearchMember);
+// remove media
+router.post('/removemedia', ItinController.Removemedia);
 
 module.exports=router;
