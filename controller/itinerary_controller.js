@@ -202,7 +202,7 @@ const Removemedia = (req,res) => {
     const plan_id = req.body.plan_id;
     Itinerary.findById(plan_id, (err, file) => {
         console.log(file);
-        file.Transport.splice(transport_id,1);
+        file.Transport.splice(parseInt(transport_id),1);
 
         file.save();
     }) 
