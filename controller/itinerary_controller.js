@@ -196,6 +196,22 @@ const RemoveLocation = (req,res) => {
 
 }
 
+//Remove media
+const Removemedia = (req,res) => {
+    const _id = req.body.location_id;
+    const plan_id = req.body.plan_id;
+    Itinerary.findById(plan_id, (err, file) => {
+        console.log(file);
+        file.Transport.splice(transport_id,1);
+
+        file.save();
+    }) 
+    res.statusCode = 200;
+            res.set("Content-Type", "application/json");
+            res.json({ success: true, message:"sucsess" });
+
+}
+
 //Change Location
 const ChangeLocation = (req,res) => {
     const oldlocation_id = req.body.oldlocation_id;
@@ -480,5 +496,6 @@ module.exports ={
     AddLocationNew,
     GetPlanLocationsNew,
     SearchMember,
-    GetTravelModes
+    GetTravelModes,
+    Removemedia
 };
